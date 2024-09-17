@@ -53,3 +53,34 @@ function fetchAndRenderCategories() {
     fetchAndRenderCategories();
   });
   
+  function renderCategories(categories) {
+    const categoryContainer = document.createElement('div');
+    categoryContainer.id = 'category-container';  // Tildel et ID til containeren
+    document.body.appendChild(categoryContainer); // Tilføj containeren til body
+  
+    // For enkelhedens skyld, pakker vi alle kategorier ind under én hovedkategori
+    const mainCategory = "All Categories";  // Dette kan tilpasses
+    renderMainCategory(mainCategory, categories, categoryContainer);
+  }
+  
+  // ...
+  
+  function renderMainCategory(mainCategory, subCategories, categoryContainer) {
+    const mainCategoryElement = document.createElement('div');
+    mainCategoryElement.classList.add('main-category');
+    mainCategoryElement.textContent = mainCategory;
+  
+    const dropdownMenu = document.createElement('div');
+    dropdownMenu.classList.add('dropdown-menu');
+  
+    // Tilføj hver sub-kategori til dropdown-menuen
+    subCategories.forEach(subCategory => {
+      const subCategoryElement = document.createElement('div');
+      subCategoryElement.classList.add('sub-category');
+      subCategoryElement.textContent = subCategory.name; // Use subCategory.name instead of just subCategory
+      dropdownMenu.appendChild(subCategoryElement);
+    });
+  
+    mainCategoryElement.appendChild(dropdownMenu);
+    categoryContainer.appendChild(mainCategoryElement); // Tilføj til den dynamisk oprettede container
+  }
